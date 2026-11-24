@@ -1,0 +1,28 @@
+/* ==========================================================================
+   tokens.css — the ONLY file in src/ that may contain colour literals.
+   Provenance: every hex below is the exact modal pixel of a named region,
+   sampled by scripts/prep-assets.py (see scripts/palette.sampled.json).
+   Source pixels read from brand/ and reference/ at full resolution.
+   ========================================================================== */
+:root {
+  /* brand/LOGO VELIUS PNG...png  (RGBA, colortype 6): mode of all alpha>200 px (shovel body) */
+  --color-accent: #ee3923;
+  /* reference/SAMPUL VELIUS JPG: mode of coral headline pixels (R>230, 70<G<110, B<90) */
+  --color-accent-soft: #fc5d47;
+  /* reference/VELIUS 1: mode of darkest sky pixels (R+G+B < 40) */
+  --color-space: #000008;
+  /* reference/VELIUS 1: mode of mid indigo sky pixels */
+  --color-indigo: #1a0145;
+  /* reference/SAMPUL VELIUS JPG: mode of deep violet haze pixels */
+  --color-violet: #1f0a29;
+  /* reference/VELIUS 1: mode of island purple blocks (R>90, B>120, G<70) */
+  --color-purple: #9600c6;
+  /* reference/VELIUS 1: mode of bright magenta blossoms (R>200, B>150, G<90) */
+  --color-magenta: #ff58ff;
+  /* reference/VELIUS 1: mode of ember sparkle pixels (R>220, 130<G<200, B<90) */
+  --color-ember: #faa249;
+  /* reference/VELIUS 1: mode of near-white headline pixels (min channel > 245) */
+  --color-ink: #ffffff;
+  /* reference/SAMPUL VELIUS JPG: mode of grass-green block pixels (G>150, R<140, B<140) */
+  --color-up: #459975;
+}

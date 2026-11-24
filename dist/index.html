@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Velius · Public access. Private ownership.</title>
+<meta name="description" content="Velius: open ground, sealed pockets, built Solana-native. A live market board, a pinned address slot and social links on one screen.">
+<meta name="theme-color" content="">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Velius · Public access. Private ownership.">
+<meta property="og:description" content="Open ground. Sealed pockets. Solana-native.">
+<meta name="twitter:card" content="summary">
+<link rel="icon" type="image/svg+xml" sizes="32x32" href="assets/brand/favicon.svg">
+<link rel="apple-touch-icon" href="assets/brand/logo-192.png">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+<div class="progress" id="progress" aria-hidden="true"></div>
+
+<header class="top" id="top">
+  <div class="bar">
+    <a class="brand" href="#home" aria-label="Velius home"><img class="bm" src="assets/brand/logo-64.png" width="28" height="28" alt=""><b>Velius</b></a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#board">Board</a>
+      <a href="#method">Method</a>
+      <a href="#ledger">Ledger</a>
+      <a href="#faq">Questions</a>
+    </nav>
+    <div class="socials" aria-label="Social links">
+      <a class="soc" data-slot="x" data-record="x" aria-label="X" title="X">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      </a>
+      <a class="soc" data-slot="github" data-record="github" aria-label="GitHub" title="GitHub">
+        <svg viewBox="0 0 16 16" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></svg>
+      </a>
+    </div>
+  </div>
+  <!-- CA slot: always visible, full address, click to copy. Inert until the register states it. -->
+  <div class="caslot" data-slot="ca-wrap">
+    <span class="ca-label">CA</span>
+    <button class="ca-btn" type="button" data-slot="ca" disabled aria-disabled="true">
+      <span class="ca-text" data-slot="ca-text">· · · · · · · · · ·</span>
+      <span class="ca-act" data-slot="ca-act">Not stated yet</span>
+    </button>
+  </div>
+</header>
+
+<main id="view">
+  <section class="hero" id="home">
+    <div class="mesh" aria-hidden="true"><i></i><i></i><i></i></div>
+    <canvas class="stars" id="stars" data-depth="0.15" aria-hidden="true"></canvas>
+    <div class="islands" id="islands" aria-hidden="true"></div>
+    <div class="shovel" data-depth="0.5" aria-hidden="true"><img src="assets/brand/logo-512.png" width="512" height="512" alt="" fetchpriority="high"></div>
+    <div class="hero-copy">
+      <div class="status-pill" id="statusPill" data-state="loading"><i></i><span id="statusText">Board syncing</span></div>
+      <h1><span>Public access.</span><span>Private ownership.</span></h1>
+      <p class="lede">Velius is Solana-native and follows a single rule: anyone may walk onto the claim, while each wallet's haul remains private business.</p>
+      <div class="cta"><a class="btn lg" href="#board">Watch the board</a><a class="btn ghost lg" href="#method">See the method</a></div>
+    </div>
+    <div class="hud">
+      <div class="chip"><i class="dot"></i><span>Mainnet-beta</span><b id="slot">—</b></div>
+      <div class="chip"><span>Home</span><b data-record-text="domain">velius.fun</b></div>
+    </div>
+  </section>
+
+  <div class="ticker" id="ticker" aria-label="Live ticker"><div class="track" id="tickerTrack"></div></div>
+
+  <section class="sec" id="board">
+    <div class="sec-head rv"><h2>The live board.</h2><p>The loudest Solana tokens ranked by boost weight, redrawn each minute. Velius reserves seat number one.</p></div>
+    <div class="board rv" data-spot>
+      <div class="board-head" role="row"><span>#</span><span>Token</span><span class="r">Price</span><span class="r">24h</span><span class="r hide-s">Volume</span><span class="r hide-m">Liquidity</span></div>
+      <div class="rows" id="rows" aria-live="polite"></div>
+      <p class="board-err" id="boardErr" hidden>The market feed went quiet. Last good numbers stay on screen, or dashes appear when none exist.</p>
+    </div>
+  </section>
+
+  <section class="sec" id="method">
+    <div class="sec-head rv"><h2>Four moves.</h2><p>How a token behaves with an open door and locked pockets.</p></div>
+    <div class="steps">
+      <article class="step rv"><figure data-scene="claim" data-spot></figure><div><span class="n">01</span><h3>Free entry</h3><p>Walk in, browse, read anything. No login, no allowlist, no toll booth at the door.</p></div></article>
+      <article class="step rv"><figure data-scene="seal" data-spot></figure><div><span class="n">02</span><h3>Seal the haul</h3><p>Rewards are meant to travel encrypted, so one wallet's stack never becomes a billboard for everybody else.</p></div></article>
+      <article class="step rv"><figure data-scene="count" data-spot></figure><div><span class="n">03</span><h3>Tally in daylight</h3><p>Aggregate numbers remain in view. Every visitor reads the exact same market board, tuned for nobody in particular.</p></div></article>
+      <article class="step rv"><figure data-scene="dig" data-spot></figure><div><span class="n">04</span><h3>Keep swinging</h3><p>Roadmap details sit inside the whitepaper: small phases, each one shipped before its successor is announced.</p></div></article>
+    </div>
+  </section>
+
+  <section class="sec" id="ledger">
+    <div class="sec-head rv"><h2>Ledger view.</h2><p>A simple sketch separating what anyone is free to read from what stays folded away.</p></div>
+    <div class="ledger-grid">
+      <div class="txcard rv" data-spot>
+        <div class="txh"><span>Sealed transfer</span><b>Treasury → payee</b></div>
+        <dl>
+          <div><dt>Source</dt><dd class="mono">treasury wallet</dd></div>
+          <div><dt>Target</dt><dd class="mono">payee wallet</dd></div>
+          <div><dt>Amount</dt><dd class="enc">••••••••</dd></div>
+          <div><dt>Token</dt><dd class="enc">•••••</dd></div>
+        </dl>
+        <div class="txf"><i></i>Finalized by validators</div>
+      </div>
+      <div class="vis rv" data-spot>
+        <table>
+          <thead><tr><th></th><th>Token</th><th>Amount</th><th>Source</th><th>Target</th></tr></thead>
+          <tbody>
+            <tr><th>Fee intake</th><td class="pub">open</td><td class="pub">open</td><td class="pub">treasury</td><td class="pub">pool</td></tr>
+            <tr><th>Reward drop</th><td class="sealed">sealed</td><td class="sealed">sealed</td><td class="pub">treasury</td><td class="pub">payee</td></tr>
+            <tr><th>Cash-out</th><td class="pub">open</td><td class="pub">open</td><td class="pub">payee</td><td class="pub">payee</td></tr>
+          </tbody>
+        </table>
+        <ul class="facts">
+          <li><b>One network</b><span>single cluster, zero detours</span></li>
+          <li><b>One source</b><span>the board reads a single registered feed</span></li>
+          <li><b>No guessing</b><span>an unstated contract stays visibly blank</span></li>
+          <li><b>No clocks</b><span>numbers here carry no timestamps</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="faq">
+    <div class="sec-head rv"><h2>Questions.</h2></div>
+    <div class="qa">
+      <details class="rv"><summary>Where does the CA live?</summary><p>Held inside a fixed strip above everything else. While unannounced, the strip says as much and ignores clicks. After announcement it prints the whole string and copies using a single tap.</p></details>
+      <details class="rv"><summary>Why does the board list other tokens?</summary><p>Context helps. Put Velius next to whatever the crowd is chasing, no tab switching required.</p></details>
+      <details class="rv"><summary>What happens when the feed fails?</summary><p>The board keeps its last good numbers and tries again with growing pauses. If it never had numbers, you see dashes and an error line instead of invented values.</p></details>
+      <details class="rv"><summary>Is there a team page?</summary><p>The whitepaper holds a placeholder for it. Names get added only when they are confirmed.</p></details>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="fl"><img class="bm" src="assets/brand/logo-64.png" width="28" height="28" alt=""><b>Velius</b><span>Public access. Private ownership.</span></div>
+  <div class="fr"><span>Solana</span><b data-record-text="domain">velius.fun</b></div>
+  <p class="legal">Prices can collapse to zero. Consider every figure informational, never guidance.</p>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script type="module" src="js/app.js"></script>
+</body>
+</html>

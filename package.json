@@ -1,0 +1,13 @@
+{
+  "name": "velius",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Velius on Solana: public access, private ownership.",
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "preview": "node scripts/serve.mjs",
+    "verify": "node scripts/verify.mjs"
+  }
+}
